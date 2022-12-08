@@ -1,4 +1,36 @@
-### Webhooks
+# Laravel Webhook Sample
+###### _In this repository you can see a sample of a Laravel project, which simulates the reception and handling of a webhook._
+
+[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
+
+### Sample Context
+###### The project contains the webhook endpoints, a GET, to retrieve the available webhooks that the system can receive, and a POST, which receives an external event via webhook. Upon receiving the webhook, the app manipulated it using the activity log lib, which also has endpoints. See more below.
+
+
+### To create it, we use:
+
+- :elephant: PHP 8.1 :elephant:
+- :whale: Docker :whale:
+
+## Get Started
+
+- We have two branches. One with the principle applied, and another without that.
+- Make a git clone of the project at your chosen branch.
+
+- Up the containers with Docker, run:
+   ```sh
+        docker-compose up -d --build
+   ```
+- The branch that have the applied principle, have automated tests. Do this to run:
+    ```sh
+        docker exec -it "container_name" bash
+        composer install
+        php artisan key:generate
+        php artisan migrate:fresh --seed
+    ```
+
+### API Doc's
+#### Webhooks
 Endpoints to manage webhooks.
 
 
@@ -13,7 +45,7 @@ POST /api/webhooks
 | `event` | `string` | **Required**. Event type, sample: PIX_CASH_IN |
 | `desription` | `string` | **Required**. Event description, sample: 'Pix received' |
 
-### Response
+#### Response
 
 ```javascript
 {
@@ -23,7 +55,7 @@ POST /api/webhooks
 
 The `message` attribute contains a message commonly used to indicate errors or, in the case of deleting a resource, success that the resource was properly deleted.
 
-### Activity Logs
+#### Activity Logs
 Endpoints to manage activity logs.
 
 
@@ -36,7 +68,7 @@ GET /api/activity-logs
 | `ID` | `integer` | **Path param**. Activity Log ID |
 
 
-### Response
+#### Response
 
 ```javascript
 {
@@ -81,3 +113,11 @@ Gophish returns the following status codes in its API:
 | 404 | `NOT FOUND` |
 | 500 | `INTERNAL SERVER ERROR` |
 
+### External packages and services
+
+This project is currently extended with the following packages and services.
+Instructions on how to use them in your own app are linked below.
+
+| Plugin | Doc |
+| ------ | ------ |
+| Laravel-activitylog | https://spatie.be/docs/laravel-activitylog/v4/introduction
